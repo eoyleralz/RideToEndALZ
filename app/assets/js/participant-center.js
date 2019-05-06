@@ -8064,7 +8064,15 @@ var photoEditor, dtContacts;
 
                 }
               }
+              if(surveyKey === 'ride_honoree') {
+                if(!$.isEmptyObject(responseValue) && (responseValue != '')) {
+                  // $('#edit-honorary').val(responseValue);
+                  $('.js__honoree-field').val(responseValue).attr('name', surveyQuestionName).closest('label');
+                  $('.js__honoree-field').prev('label').attr('for', surveyQuestionName);
 
+                  $('.js__honoree-answer').html(responseValue);
+                }
+              }
               if(surveyKey === 'tshirt_size') {
                 if(!$.isEmptyObject(responseValue) && (responseValue != '')) {
                   $('.js__tshirt-size-field').attr('name', surveyQuestionName);
@@ -8167,14 +8175,14 @@ var photoEditor, dtContacts;
                 }
               }
 
-              if(surveyResponse.questionText === 'I am participating to honor') {
-                $('#edit-honorary').data('questionid', questionId);
+              // if(surveyResponse.questionText === 'I am participating to honor') {
+              //   $('#edit-honorary').data('questionid', questionId);
                 
-                if(!$.isEmptyObject(responseValue) && (responseValue != '')) {
-                  $('#edit-honorary').val(responseValue);
-                  $('.honoraryName').html(responseValue);
-                }
-              }
+              //   if(!$.isEmptyObject(responseValue) && (responseValue != '')) {
+              //     $('#edit-honorary').val(responseValue);
+              //     $('.honoraryName').html(responseValue);
+              //   }
+              // }
               if(surveyResponse.questionText === 'Name in personal video') {
                 $('#edit-video-name').data('questionid', questionId);
                 
@@ -8302,11 +8310,11 @@ var photoEditor, dtContacts;
       var requestData={
         charity_id: charity_id,
         external_id: 'lotrp:'+adarda.trpc.frId+'-'+adarda.trpc.cons.profile.id,
-        fundraiser_name: adarda.trpc.cons.profile.name.first.substring(0,39) + ' is Walking to End Alzheimer\'s!',
+        fundraiser_name: adarda.trpc.cons.profile.name.first.substring(0,39) + ' is Riding to End Alzheimer\'s!',
         cover_photo: 1,
-        default_cover_photo: 'https://act.alz.org/images/content/pagebuilder/WALK_FacebookFundraiser_fbdefaultbanner.jpg',
-        default_goal_amount: '300.00',
-        end_time: Math.round((new Date(2018,11,31,22,59,59,0)).getTime() / 1000),
+        default_cover_photo: 'https://act.alz.org/images/content/pagebuilder/FacebookFundraiserCover_purplebike01.jpg',
+        default_goal_amount: '1600.00',
+        end_time: Math.round((new Date(adarda.trpc.teamraiser['tr'+adarda.trpc.frId].date).getTime()) / 1000 + 2592000),
         facebook_user_id: adarda.trpc.cons.profile.fb.userId,
         access_token: adarda.trpc.cons.profile.fb.accessToken
       };
@@ -8319,7 +8327,7 @@ var photoEditor, dtContacts;
       }).done(function(resp){
           if (!resp.error) {
             $('.fbf-link').attr('href','https://www.facebook.com/donate/'+resp.fundraiser.id);
-            $('.js__btn-fbf').attr('href','https://www.facebook.com/donate/'+resp.fundraiser.id).attr('target','_blank').html('<span class="icon-facebook"></span> View on Facebook');
+            $('.js__btn-fbf').attr('href','https://www.facebook.com/donate/'+resp.fundraiser.id).attr('target','_blank').html('GO TO FACEBOOK <i class="fas fa-chevron-right"></i>');
             $('.fbf-msg-new').addClass('hidden');
             $('.fbf-msg-created').removeClass('hidden');
             adarda.trpc.ui.fbSyncDonations();
@@ -8434,6 +8442,21 @@ var photoEditor, dtContacts;
     if(currentHash && currentHash != '' && $(currentHash).length > 0) {
       $(window).scrollTop($(currentHash).offset().top)
                .scrollLeft($(currentHash).offset().left);
+    }
+    if(viewName === 'pc-social'){
+      //console.log("here is social");
+      if (!jQuery('#social-tab-tab iframe').length > 0) {
+        //console.log("Social does NOT exist");
+        var bfSocialVars = new Object();
+        var bfDataSet = window.parent.document.getElementById('social-tab-tab');
+        bfSocialVars.bfConsId = adarda.trpc.cons.profile.id;
+        bfSocialVars.bfFrId = adarda.trpc.frId;
+        bfSocialVars.bfAcct = "alzaride";
+        bfSocialVars.bfauth = bfDataSet.dataset.bfauth;
+        bfSocialVars.bfsession = bfDataSet.dataset.bfsession;
+        //console.log(bfSocialVars);
+        jQuery('#social-tab-tab').append('<iframe title="Boundless Fundraising Social App" src="https://bfapps1.boundlessfundraising.com/applications/'+bfSocialVars.bfAcct+'/social/app/ui/#/addsocial/'+bfSocialVars.bfConsId+'/'+bfSocialVars.bfFrId+'/'+bfSocialVars.bfauth+'/'+bfSocialVars.bfsession+'/?source=PCSocial" style="width:100%;height:1000px;border:1px solid #cccccc;"></iframe>');
+      }
     }
   })
   /* logout event */
@@ -8628,7 +8651,9 @@ START CUSTOM BOUNDLESS FUNDRAISING LIGHTBOX FUNCTION (***DO NOT EDIT***)
   //MODERNIZER TOUCH ACCESS (***DO NOT EDIT***)
   var userAgent = navigator.userAgent || navigator.vendor || window.opera;
  userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i) ? walk.dialogOverlayOpen('#pc-lightbox-mobile-apple') : userAgent.match(/Android/i) ? walk.dialogOverlayOpen('#pc-lightbox-mobile-android') : setTimeout(function() {
-  walk.dialogOverlayOpen('#pc-lightbox')
+  if($('#pc-lightbox').length > 0) {
+    walk.dialogOverlayOpen('#pc-lightbox')
+  }
  }, 1e3);
   //END MODERNIZER TOUCH ACCESS
   /*------------------------------------------------------------------------
@@ -8658,13 +8683,14 @@ END CUSTOM BOUNDLESS FUNDRAISING LIGHTBOX FUNCTION (***DO NOT EDIT***)
     showLoading();
   }
 
-  if(document.cookie.indexOf('pcVisits=1') > 0 && $('.js__registration-thank-you-dialog').length === 0) {
+  if(document.cookie.indexOf('pcVisits=1') > 0 && $('.js__registration-thank-you-dialog').length === 0 && $('.page-update-step').data('pageupdated') !== 'true') {
     walk.dialogOverlayOpen('#update-your-page-dialog');
     deleteCookie('pcVisits');
   }
 
   if($('#pc-container').data('daystoevent') === 30) {
-    walk.dialogOverlayOpen('#fundraising-progress-dialog');
+    // TODO - update the copy for this modal in reus_ridepc_modals before turning it on again
+    // walk.dialogOverlayOpen('#fundraising-progress-dialog');
   }
   /* init text editors */
   $('.jquery-text-editor').jqte({
@@ -9251,7 +9277,7 @@ END CUSTOM BOUNDLESS FUNDRAISING LIGHTBOX FUNCTION (***DO NOT EDIT***)
         $('#pc-nav-notifications').popover('toggle');
       }
     });
-    
+
     /* handle view change links */
     /* any link with className "load-view" will load the view specified by the href attribute */
     $('body').on('click', '.load-view', function(e) {
@@ -9371,7 +9397,8 @@ $('.pc-navbar .navbar-collapse').collapse('hide');
   	
   	/* handle Next Steps when editing page */
     $('#edit-personal-photo-1-submit, #edit-personal-caption-submit, #edit-personal-page-save').click(function(){
-  		$('.editPageCompleted').removeClass('hidden');
+      $('.editPageCompleted').removeClass('hidden');
+      $('.page-update-step').data('pageupdated', 'true');
   		$('.editPageNotCompleted').hide();
   	});
       
@@ -11373,7 +11400,10 @@ console.log('hide subsequent popover');
         form: '#edit-personal-page-form', 
         callback: {
           success: function(response) {
-            hideLoading();
+            console.log('success updating personal page');
+            // hideLoading();
+            $('.js__pc-loading-modal').modal('hide');
+            $('.modal-backdrop').not('.js--popover-modal-backdrop').remove();
             scrollToTop();
             if(response.teamraiserErrorResponse) {
               var errorCode = response.teamraiserErrorResponse.code, 
@@ -11385,12 +11415,17 @@ console.log('hide subsequent popover');
               setEditorContent('#edit-personal-page-body', response.teamraiserErrorResponse.body);
             }
             else {
+              // hideLoading();
+              $('.js__pc-loading-modal').modal('hide');
+              $('.modal-backdrop').not('.js--popover-modal-backdrop').remove();
               $('#pc-edit-page-success').removeClass('hidden');
             }
             
           }, 
           error: function(response) {
-            hideLoading();
+            // hideLoading();
+            $('.js__pc-loading-modal').modal('hide');
+            $('.modal-backdrop').not('.js--popover-modal-backdrop').remove();
             if(handleApiError(response)) {
               adarda.trpc.ui.updatePageError(response.errorResponse.message);
             }
@@ -11867,12 +11902,16 @@ console.log('hide subsequent popover');
     /* handle email your team button */
     $('.email-team-members').click(function(e) {
       e.preventDefault();
-      
       $('#pc2EmailSection').addClass('show');
       $('#pc-email-view').addClass('email_rpt_show_teammates');
       adarda.trpc.view('pc-email');
-      setTimeout(function(){$.scrollTo($('#pc2EmailSection'), {axis: 'y', duration: 800, easing: 'swing'});}, 300);
-      
+      setTimeout(function(){
+        $.scrollTo($('#pc2EmailSection'), {axis: 'y', duration: 800, easing: 'swing'});
+      }, 300);
+      setTimeout(function(){
+        $('#email-contacts-modal').modal('show');
+        $('.js--email-contacts-filter').val('email_rpt_show_teammates');
+      }, 1000);
       return false;
     });
 
@@ -12070,7 +12109,8 @@ console.log('hide subsequent popover');
 
     /* facebook create buttons */
     $('.js__btn-fbf').click(function(e){
-      if ($(this).html().indexOf('View') == -1) {
+      if ($(this).html().indexOf('GO') == -1 && $(this).html().indexOf('Go') == -1) {
+        e.preventDefault();
         e.preventDefault();
         $('.js__btn-fbf').each(function(){
           $(this).data('original',$(this).html()).html('Loading...');
@@ -12155,6 +12195,7 @@ $('.js__cancel-reg-update-btn').on('click', function(e){
 
     var hasMobilePhone = $('.js__mobile-phone-field').val();
     var hasAlzConnection = $('.js__alz-connection-field').val();
+    var hasHonoree = ($('.js__honoree-field').val().length ? $('.js__honoree-field').val() : 'User Provided No Response');
     var hasTshirtSize = $('.js__tshirt-size-field').val();
     var hasRideRoute = $('.js__ride-route-field').val();
     var hasIsVegetarian = $('.js__is-vegetarian-field input:checked').val();
@@ -12165,7 +12206,7 @@ $('.js__cancel-reg-update-btn').on('click', function(e){
       var surveyResponse = this, 
       surveyKey = surveyResponse.key || '';
       // console.log('surveyKey: ', surveyKey);
-      if(surveyKey !== 'mobile_phone' && surveyKey !== 'alz_connection' && surveyKey !== 'tshirt_size' && surveyKey !== 'ride_route' && surveyKey !== 'is_vegetarian' && surveyKey !== 'crew_interests' && surveyKey !== 'volunteer_interests') {
+      if(surveyKey !== 'mobile_phone' && surveyKey !== 'ride_honoree' && surveyKey !== 'alz_connection' && surveyKey !== 'tshirt_size' && surveyKey !== 'ride_route' && surveyKey !== 'is_vegetarian' && surveyKey !== 'crew_interests' && surveyKey !== 'volunteer_interests') {
         var responseValue = this.responseValue;
         if(typeof responseValue != 'string' || responseValue === 'User Provided No Response') {
           responseValue = '';
@@ -12178,7 +12219,7 @@ $('.js__cancel-reg-update-btn').on('click', function(e){
 
     adarda.updateSurveyResponses({
       frId: adarda.trpc.frId,
-      data: surveyQuestions + (hasMobilePhone ? '&question_key_mobile_phone=' + encodeURIComponent(hasMobilePhone) : '')  + (hasAlzConnection ? '&question_key_alz_connection=' + encodeURIComponent(hasAlzConnection) : '')  + (hasTshirtSize ? '&question_key_tshirt_size=' + encodeURIComponent(hasTshirtSize) : '')  + (hasRideRoute ? '&question_key_ride_route=' + encodeURIComponent(hasRideRoute) : '')  + (hasIsVegetarian  ? '&question_key_is_vegetarian=' + encodeURIComponent(hasIsVegetarian) : '') + (hasVolunteerPosition  ? '&question_key_volunteer_interests=' + encodeURIComponent(hasVolunteerPosition) : '') + (hasCrewPosition  ? '&question_key_crew_interests=' + encodeURIComponent(hasCrewPosition) : ''), 
+      data: surveyQuestions + (hasMobilePhone ? '&question_key_mobile_phone=' + encodeURIComponent(hasMobilePhone) : '')  + (hasAlzConnection ? '&question_key_alz_connection=' + encodeURIComponent(hasAlzConnection) : '') + (hasHonoree ? '&question_key_ride_honoree=' + encodeURIComponent(hasHonoree) : '') + (hasTshirtSize ? '&question_key_tshirt_size=' + encodeURIComponent(hasTshirtSize) : '')  + (hasRideRoute ? '&question_key_ride_route=' + encodeURIComponent(hasRideRoute) : '')  + (hasIsVegetarian  ? '&question_key_is_vegetarian=' + encodeURIComponent(hasIsVegetarian) : '') + (hasVolunteerPosition  ? '&question_key_volunteer_interests=' + encodeURIComponent(hasVolunteerPosition) : '') + (hasCrewPosition  ? '&question_key_crew_interests=' + encodeURIComponent(hasCrewPosition) : ''), 
       callback: {
         success: function(response) {
           if(response.updateSurveyResponsesResponse.success == 'false') {
@@ -12187,9 +12228,10 @@ $('.js__cancel-reg-update-btn').on('click', function(e){
           }
           else {
             console.log('survey update success: ', response.updateSurveyResponsesResponse);
-
+  console.log('hasHonoree: ', hasHonoree);
             $('.js__mobile-phone-answer').html(hasMobilePhone);
             $('.js__alz-connection-answer').html(hasAlzConnection);
+            $('.js__honoree-answer').html((hasHonoree === 'User Provided No Response' ? '' : hasHonoree));
             $('.js__tshirt-size-answer').html(hasTshirtSize);
 
             // RIDER ONLY QUESTIONS
