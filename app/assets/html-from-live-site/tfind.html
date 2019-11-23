@@ -1,0 +1,107 @@
+
+
+    <!-- BEGIN TFIND Registration Top -->
+
+<!-- BEGIN reg options section -->
+    <div class="reg-options js__reg-options-container" style="display:none;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="reg-headline">
+              How Will You Register?</h1>
+          </div>
+        </div>
+
+        <div class="row my-3 justify-content-center">
+          <div class="col-sm-10 col-md-9 col-lg-6 col-xl-5">
+
+            <div class="reg-option my-4 reg-start-team">
+              <a href="TRR/?pg=tfind&amp;fr_id=[[S80:trID]]&amp;fr_tm_opt=new&amp;s_regType=startTeam&amp;s_hideTeamDetails=true[[?xx::x[[S1:first_name]]x::&amp;skip_login_page=true::]]" class="button btn-secondary btn-block text-left reg-option-link js__show-start-team">START A TEAM
+                <span class="reg-icon float-right d-flex align-items-center justify-content-center">
+                  <i class="fas fa-users"></i>
+                </span>
+              </a>
+              <span class="reg-option-text small">Riding for a good cause is more fun with friends and family! Start a team if you have at least one-person that wants to ride with you and recruit 4-people to join you to qualify for team perks!</span>
+            </div>
+            <div class="reg-option my-4 reg-join-team">
+              <a href="TRR/?pg=tfind&amp;fr_id=[[S80:trID]]&amp;fr_tm_opt=existing&amp;s_regType=joinTeam[[?xx::x[[S1:first_name]]x::&amp;skip_login_page=true::]]" class="button btn-secondary btn-block text-left reg-option-link js__show-team-join">JOIN A TEAM
+                <span class="reg-icon float-right d-flex align-items-center justify-content-center">
+                  <i class="fas fa-user-plus"></i>
+                </span>
+              </a>
+              <span class="reg-option-text small">Gear up and register as a member of an existing Ride team.</span>
+            </div>
+
+            <div class="reg-option my-4 reg-individual">
+              <a href="TRR/?pg=tfind&amp;fr_id=[[S80:trID]]&amp;fr_tm_opt=none&amp;s_regType=individual[[?xx::x[[S1:first_name]]x::&amp;skip_login_page=true::]]" class="button btn-secondary btn-block text-left reg-option-link js__reg-individual"><span class=class="d-none d-sm-inline-block d-md-none d-lg-none">PARTICIPATE AS AN&nbsp;</span>INDIVIDUAL
+                <span class="reg-icon float-right d-flex align-items-center justify-content-center">
+                  <i class="fas fa-user"></i>
+                </span>
+              </a>
+              <span class="reg-option-text small">Choose this option if you would like to participate as a rider without being associated with a team.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- END reg options section -->
+<!-- BEGIN reg join team section -->
+    <div class="join-team-section">
+        <div class="container">
+          <div class="join-team-container js__join-team-container" style="display:none;">
+          <div class="row">
+            <div class="col-md-8 offset-md-2 text-center">
+              <h1 class="reg-headline">
+                Join a Team</h1>
+            </div>
+          </div>
+          <div class="row">
+              <div class="reg-text mt-3 col-md-6 offset-md-3"><p>Search for an existing Team by Team name, Team association, or Team member.</p></div>
+          </div>
+          <div class="row my-3">
+              <div class="col-md-4 col-sm-6 offset-md-4 offset-sm-3">
+                      <form class="js__reg-team-search-form">
+                        <div class="form-group">
+                          <label class="" for="regTeamName">Team Name</label>
+                          <input type="text" name="user_name" id="regTeamName" class="form-control" aria-describedby="regTeamNameHelpBlock">
+                        </div>
+                        <div class="form-group">
+                          <label class="" for="regCompanyId">Team's Group/Company</label>
+                          <select name="regCompanyId" id="regCompanyId" class="form-control js__reg-company-name">
+                            <option selected="selected" value="">Choose from existing list</option>
+                          </select>
+                        </div>
+
+                        <label class="" for="">Team Member</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="regTeamMemberFirst">Team Member First Name</label>
+                            <input type="text" name="user_password" id="regTeamMemberFirst" class="form-control" placeholder="First Name" aria-describedby="regTeamMemberFirstHelpBlock">
+                          </div>
+                          <div class="form-group">
+                              <label class="sr-only" for="regTeamMemberLast">Team Member Last Name</label>
+                              <input type="text" name="user_password" id="regTeamMemberLast" class="form-control" placeholder="Last Name" aria-describedby="regTeamMemberLastHelpBlock">
+                            </div>
+                            <div class="form-group text-center">
+                              <button type="submit" class="button btn-secondary">SEARCH FOR A TEAM</button>
+                            </div>
+                     
+                      </form>
+            </div>
+         
+            <div class="search-results-container reg-team-search-results js__search-results col-md-6 offset-md-3">
+                <div class="js__error-team-search help-block alert alert-danger text-center mt-2" style="display:none;"></div>
+  
+                    <div class="js__loading py-4 text-center  text-primary" style="display:none;"><i class="fas fa-cog fa-2x fa-spin"></i><br>
+                      Loading...
+                    </div>
+                  <div class="results-table py-4 js__search-results-container" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+<!-- END reg join team section -->
+
+    <!-- END TFIND Registration Bottom -->
+
+    

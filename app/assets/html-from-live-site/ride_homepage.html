@@ -1,0 +1,116 @@
+
+
+        <!-- BEGIN hero section -->
+      <div class="hero-header-container">
+          <div class="jumbotron text-center text-white">
+            <h1>
+              <span class="display-4">GIVE US YOUR ALL</span>
+              <span class="display-3">AND WE WILL, TOO.</span>
+            </h1>
+            <p class="lead">100% of dollars raised for Ride to End ALZ support research efforts.</p>
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-3">
+                <!-- <a class="button btn-secondary btn-lg btn-block" href="#" role="button" data-toggle="modal" data-target="#registerModal" onClick="ga('send', 'event', 'ride landing', 'click', 'banner-register');">REGISTER</a> -->
+                <a class="button btn-secondary btn-lg btn-block" href="SPageServer/?pagename=ride_survey" onClick="ga('send', 'event', 'ride landing', 'click', 'banner-register');">REGISTER</a>
+              </div>
+              <div class="col-md-3">
+                <a class="button btn-outline-light btn-lg btn-block" href="SPageServer/?pagename=ride_search&search_type=donate" role="button" onClick="ga('send', 'event', 'ride landing', 'click', 'banner-donate');">DONATE</a>
+              </div>
+            </div>
+            <div class="hero-link-container row d-flex justify-content-center">
+              <div class="col-md-5">
+                  <a href="SPageServer/?pagename=ride_about" onClick="ga('send', 'event', 'ride landing', 'click', 'banner-learn-more');">Learn More</a>
+                <!-- <a href="SSurvey?ACTION_REQUIRED=URI_ACTION_USER_REQUESTS&SURVEY_ID=58025&autologin=true" onClick="ga('send', 'event', 'ride landing', 'click', 'banner-learn-more');"><i class="far fa-clock fa-lg"></i>Learn More at Our Webinar on 1/24</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- END hero section -->
+        <span class="horizontal-divider"></span>
+
+ <!-- BEGIN Join Us section -->
+ <section id="what_is_ride" class="what-is-ride-container text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-10 offset-1">
+           <h2 class="h3">
+               Ride to End ALZ is much more than a bike ride.
+           </h2>
+           <p>
+             The Alzheimer's Association Ride to End ALZ is a fully supported, one-day fundraising event to directly impact the pace and momentum behind the fight to end Alzheimer's disease. Choose from multiple route options that challenge you to go the distance.
+           </p>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-10 offset-1">
+            <h2 class="h3">
+                Right now, there is no shortage of ideas in Alzheimer's research &mdash; only dollars. But you can help change that.
+            </h2>
+            <p>
+               Inspired by science and driven by a determination to end this disease, participants in Ride to End ALZ raise funds and awareness to advance research toward the first survivor of Alzheimer's. Join us.
+            </p>
+         </div>
+       </div>
+    </div>
+
+
+
+  </section>
+  <!-- END Join Us section -->
+
+    <!-- BEGIN Join Us section -->
+    <section id="join_us" class="join-us-container text-center">
+      <h2>
+          <span class="d-lg-none">JOIN US</span>
+        <span class="d-none d-lg-inline-block">SELECT YOUR RIDE</span>
+      </h2>
+      <div class="container mt-5">
+        <div class="card-deck justify-content-center">
+            [[S51:reus_ride_2018_join_us]]
+        </div>
+      </div>
+    </section>
+    <!-- END Join Us section -->
+
+    <!-- BEGIN Search section -->
+    <section id="landing_search" class="landing-search-container text-center bg-secondary text-white stripe-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 offset-md-2 search-participant-container">
+            <h3>FIND A PARTICIPANT</h3>
+            <form class="js__redirect-participant-search-form">
+                <div class="d-flex flex-wrap flex-md-nowrap">
+                  <label class="sr-only" for="participantFirstName">First Name</label>
+                  <input id="participantFirstName" type="text" class="col-md-5 form-control form-control-lg mr-lg-1" placeholder="FIRST NAME" style="height:60px;">
+                  <label class="sr-only" for="participantLastName">Last Name</label>
+                  <div class="d-flex w-100">
+                  <input id="participantLastName" type="text" class="col-md-5 form-control form-control-lg ml-lg-1 search-last-name flex-grow-1" placeholder="LAST NAME">
+                  <button type="submit" class="btn btn-lg btn-primary search-participant-button" onClick="ga('send', 'event', 'ride landing', 'click', 'find-participant');">
+                    <span class="sr-only">Search</span>
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                </div>
+              </form>
+          </div>
+
+          <div class="col-md-4 search-team-container">
+            <h3>FIND A TEAM</h3>
+            <form class="js__redirect-team-search-form">
+              <div class="d-flex">
+                <label class="sr-only" for="teamName">Team Name</label>
+                <input type="text" class="form-control form-control-lg mb-2" id="teamName" placeholder="TEAM NAME">
+                <button type="submit" class="btn btn-lg btn-primary mb-2" onClick="ga('send', 'event', 'ride landing', 'click', 'find-team');">
+                  <span class="sr-only">Search</span>
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END Search section -->
+
+

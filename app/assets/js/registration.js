@@ -272,7 +272,7 @@
       showStartTeam();
 
       $('.section-header-text').text('Start a Team');
-      $('#team_find_section_body').before('<div class="reg-text mt-3 col-md-8 offset-md-2"><p>Riders must meet their $2,500 required fundraising minimum in order to participate. When calculating your Team fundraising goal use this formula: <strong>Number of Riders x $2,500 = Goal</strong>. And then add on 30% as a Team "stretch goal". Keep in mind, no matter what you set your individual or Team goal to be, the required fundraising minimum for each Rider is $2,500.</p></div>');
+      $('#team_find_section_body').before('<div class="reg-text mt-3 col-md-8 offset-md-2"><p>Note:  Each rider on the team is individually responsible for meeting at least the $500 fundraising minimum in order to participate.  Set your starting team goal based upon the number of team members you think you can recruit multiplied by $500-$1,000 for each team member! </p></div>');
       $('#company_label_container').text("Group/Company (optional)");
 
 
@@ -454,11 +454,11 @@
       // $('.part-type-container label').addClass('custom-control-label');
 
       $('#part_type_additional_gift_container').before('<div class="section-header" id="part_type_section_header"><div><span class="section-header-text text-uppercase">Did you know?</span></div></div><div class="bg-primary stripe-overlay text-white text-center text-uppercase h2 py-5 mt-3 did-you-know-text"><div class="col-md-8 offset-md-2">Every 65 seconds, someone in the United States develops Alzheimer\'s disease.</div></div>');
-      $('#part_type_additional_gift_section_header').addClass("col-md-12").html("<p>As the world's largest nonprofit funder of Alzheimer's disease research, the Alzheimer's Association is setting the pace of the field with innovation and investment - and you're setting the pace with each pedal stroke.</p><p><strong>Would you like to make a $65 self-donation now</strong> to set your fundraising pace and breakaway from the pack?</p>");
-$('#fr_part_co_list_new').val('Enter a new company or organization');
+      $('#part_type_additional_gift_section_header').addClass("col-md-12").html("<p>As the world's largest nonprofit funder of Alzheimer's disease research, the Alzheimer's Association is setting the pace of the field with innovation and investment - and you're setting the pace with each pedal stroke.</p><p><strong>Would you like to make a self-donation now</strong> to set your fundraising pace and breakaway from the pack?</p>");
+      $('#fr_part_co_list_new').val('Enter a new company or organization');
       // $('.donation-level-row-container').addClass('custom-control').addClass('custom-radio');
       // $('.donation-level-row-decoration-container label').addClass('custom-control-label');
-$('#suggested_goal_container').text('The required fundraising minimum commitment is $2,500 for Riders. Stretch goals are encouraged!');
+      $('#suggested_goal_container').text('The required fundraising minimum commitment is $500 for Riders. Stretch goals are encouraged!');
       $('#part_type_additional_gift_container, #part_type_individual_company_selection_container').addClass('col-md-8 offset-md-2');
       $('.donation-level-container').addClass('row');
       $('.donation-level-amount-text').closest('.donation-level-row-container').addClass('don-level-btn col-md-3');

@@ -281,264 +281,274 @@
 
   <main class="content-container" role="main">
     <!--endRemoveIf(production)-->
+
+    
     <!-- BEGIN hero section -->
     <div class="hero-header-container" style="background: url([[E47:[[S334:fr_id]]:fr_info:1:sponsor_3]]) center center no-repeat; background-size: cover;">
-      <div class="jumbotron text-center text-white">
-        <h1>
-          <span class="display-4">RIDE TO END ALZ</span>
-          <span class="display-3">[[E47:[[S334:fr_id]]:fr_info:1:event_location_city]],&nbsp;[[E47:[[S334:fr_id]]:fr_info:1:event_location_state]]</span>
-        </h1>
-        <p class="lead">[[E47:[[S334:fr_id]]:fr_info:1:event_date]]</p>
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-3">
-              [[?xx::x[[S1:user_name]]x::
-              [[?x1x2x::x[[S42:0:status]]x::
-              <a class="button btn-secondary btn-lg btn-block" href="TRR/pg=utype&amp;fr_id=[[S334:fr_id]]" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-register']);">REGISTER</a>
-              ::]]
-            ::
-              [[?xx::x[[S48:0:part-type-id]]x::
-                <a class="button btn-secondary btn-lg btn-block" href="TRR/pg=utype&amp;fr_id=[[S334:fr_id]]" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-register']);">REGISTER</a>
-              ::
-                <a class="button btn-secondary btn-lg btn-block menu-btn" href="TRC/?pg=center&amp;fr_id=[[S334:fr_id]]"  onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-ride-hub']);">RIDE HUB</a>
-              ]]
-            ]]
-          </div>
-          <div class="col-md-3">
-            [[?x2x3x::x[[S42:0:status]]x::
-            <a class="button btn-outline-light btn-lg btn-block" href="SPageServer/?pagename=ride_search&search_type=donate" role="button" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-donate']);">DONATE</a>
-            ::]]
-          </div>
-        </div>
-        <div class="hero-link-container row d-flex justify-content-center">
-          <div class="col-md-3">
-              [[?xx::x[[S1:user_name]]x::
-              <a href="TR?fr_id=[[S80:evID]]&amp;pg=informational&amp;sid=25339"  onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-learn-more']);">Learn More</a>
+        <div class="jumbotron text-center text-white">
+          <h1>
+            <span class="display-4">RIDE TO END ALZ</span>
+            <!-- <span class="display-3">[[E47:[[S334:fr_id]]:fr_info:1:event_location_city]],&nbsp;[[E47:[[S334:fr_id]]:fr_info:1:event_location_state]]</span> -->
+            <span class="display-3">[[E47:[[S334:fr_id]]:fr_info:1:event_title]]</span>
+          </h1>
+          <p class="lead">[[E47:[[S334:fr_id]]:fr_info:1:event_date]]</p>
+          <div class="row d-flex justify-content-center">
+                [[?xx::x[[S1:user_name]]x::
+                [[?x1x2x::x[[S42:0:status]]x::
+            <div class="col-md-4 col-lg-3">
+                <a class="button btn-secondary btn-lg btn-block" href="TRR/?pg=utype&amp;fr_id=[[S334:fr_id]]" onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-register');">REGISTER NOW</a>
+            </div>
+  
+                ::]]
               ::
                 [[?xx::x[[S48:0:part-type-id]]x::
-                <a href="TR?fr_id=[[S80:evID]]&amp;pg=informational&amp;sid=25339"  onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-learn-more']);">Learn More</a>
+            <div class="col-md-4 col-lg-3">
+                  <a class="button btn-secondary btn-lg btn-block" href="TRR/?pg=utype&amp;fr_id=[[S334:fr_id]]" onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-register');">REGISTER NOW</a>
+            </div>
+  
                 ::
-                <a href="#" data-toggle="modal" data-target="#registerModal" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'banner-register']);">Register for a Different Ride</a>
+            <div class="col-md-4 col-lg-3">
+                  <a class="button btn-secondary btn-lg btn-block menu-btn" href="TRC/?pg=center&amp;fr_id=[[S334:fr_id]]"  onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-ride-hub');">RIDE HUB</a>
+            </div>
+  
                 ]]
               ]]
+              [[?x2x3x::x[[S42:0:status]]x::
+            <div class="col-md-4 col-lg-3">
+              <a class="button btn-outline-light btn-lg btn-block" href="SPageServer/?pagename=ride_search&search_type=donate" role="button" onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-donate');">DONATE</a>
+            </div>
+              ::]]
+          </div>
+          <div class="hero-link-container row d-flex justify-content-center">
+              <div class="col-md-6">
+                  [[?xx::x[[S1:user_name]]x::
+                    <!-- <a href="#ride_details"  onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-ride-details');">Ride Details</a> -->
+                    <a class="" href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=25339" role="button" onClick="ga('send', 'event', 'ride greeting', 'click', 'details-event-info');">Learn More About This Event</a>
+                  ::
+                    [[?xx::x[[S48:0:part-type-id]]x::
+                    <!-- <a href="#ride_details"  onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-ride-details');">Ride Details</a> -->
+                    <a class="" href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=25339" role="button" onClick="ga('send', 'event', 'ride greeting', 'click', 'details-event-info');">Learn More About This Event</a>
+                    ::
+                    <a href="#" data-toggle="modal" data-target="#registerModal" onClick="ga('send', 'event', 'ride greeting', 'click', 'banner-register');">Register for a Different Ride</a>
+                    ]]
+                  ]]
+              </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- END hero section -->
-    <span class="horizontal-divider"></span>
-
-    <!-- BEGIN Progress section -->
-    <section id="event_progress" class="fundraiser-progress-container">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="progress-header">
-              <div class="fundraiser-raised text-primary">
-                <small>RAISED</small>
-                <span class="h2 amount-raised js__fundraiser-raised">[[E130:"[[E42:[[S334:fr_id]]:dollars]]" ".00" "" replaceall]]</span>
+      <!-- END hero section -->
+      <span class="horizontal-divider"></span>
+  
+      <!-- BEGIN Progress section -->
+      <section id="event_progress" class="fundraiser-progress-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="progress-header">
+                <div class="fundraiser-raised text-primary">
+                  <span class="h2 amount-raised js__fundraiser-raised">[[E130:"[[E42:[[S334:fr_id]]:dollars]]" ".00" "" replaceall]]</span> <small>RAISED</small>
+                </div>
+                <div class="fundraiser-goal text-primary d-none d-sm-block">
+                  <small>GOAL</small> <span class="h2 amount-raised js__fundraiser-goal">[[E130:"[[E42:[[S334:fr_id]]:goal]]" ".00" "" replaceall]]</span>
+                </div>
               </div>
-              <div class="fundraiser-goal text-primary d-none d-sm-block">
+  
+  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 progress-container">
+              <div class="progress-wrap">
+                <div class="progress">
+                  <div class="progress-bar js__progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                  <span class="js__percent-raised percent-raised d-flex align-items-center justify-content-center" style="left:0%;">0%</span>
+                </div>
+                <span class="progress-marker" style="left:10%;" title="10%"></span>
+                <span class="progress-marker" style="left:20%;" title="20%"></span>
+                <span class="progress-marker" style="left:30%;" title="30%"></span>
+                <span class="progress-marker" style="left:40%;" title="40%"></span>
+                <span class="progress-marker" style="left:50%;" title="50%"></span>
+                <span class="progress-marker" style="left:60%;" title="60%"></span>
+                <span class="progress-marker" style="left:70%;" title="70%"></span>
+                <span class="progress-marker" style="left:80%;" title="80%"></span>
+                <span class="progress-marker" style="left:90%;" title="90%"></span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-12 fundraiser-stats text-primary text-center">
+              <div class="fundraiser-goal text-primary d-sm-none">
                 <small>GOAL</small>
                 <span class="h2 amount-raised js__fundraiser-goal">[[E130:"[[E42:[[S334:fr_id]]:goal]]" ".00" "" replaceall]]</span>
               </div>
-            </div>
-
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 progress-container">
-            <div class="progress-wrap">
-              <div class="progress">
-                <div class="progress-bar js__progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                <span class="js__percent-raised percent-raised d-flex align-items-center justify-content-center" style="left:0%;">0%</span>
-              </div>
-              <span class="progress-marker" style="left:10%;" title="10%"></span>
-              <span class="progress-marker" style="left:20%;" title="20%"></span>
-              <span class="progress-marker" style="left:30%;" title="30%"></span>
-              <span class="progress-marker" style="left:40%;" title="40%"></span>
-              <span class="progress-marker" style="left:50%;" title="50%"></span>
-              <span class="progress-marker" style="left:60%;" title="60%"></span>
-              <span class="progress-marker" style="left:70%;" title="70%"></span>
-              <span class="progress-marker" style="left:80%;" title="80%"></span>
-              <span class="progress-marker" style="left:90%;" title="90%"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row justify-content-center mt-3">
-          <div class="col-md-12 fundraiser-stats text-primary text-center">
-            <div class="fundraiser-goal text-primary d-sm-none">
-              <small>GOAL</small>
-              <span class="h2 amount-raised js__fundraiser-goal">[[E130:"[[E42:[[S334:fr_id]]:goal]]" ".00" "" replaceall]]</span>
-            </div>
-            <hr class="bg-primary d-sm-none my-1">
-            <div class="days-left h2 font-weight-bold">
-                [[?x[[E130:[[S42:0:days-to-event]] 1 > ]]x::x1x::
-                [[E42:[[S334:fr_id]]:days-to-event]]
-                  <small class="text-uppercase d-block m-0">
-                  Days left until Ride</small>
-              ::
-                  [[?x[[E130:[[S42:0:days-to-event]] 0 >]]x::x1x::[[E42:[[S334:fr_id]]:days-to-event]]
-                  <small class="text-uppercase d-block m-0">
-                  Day left until Ride</small>
+              <hr class="bg-primary d-sm-none my-1">
+              <div class="days-left h2 font-weight-bold">
+                  [[?x[[E130:[[S42:0:days-to-event]] 1 > ]]x::x1x::
+                  [[E42:[[S334:fr_id]]:days-to-event]] <small class="text-uppercase m-0">Days until the Ride</small>
                 ::
-                  <!-- Ride has occurred  - show nothing -->
+                    [[?x[[E130:[[S42:0:days-to-event]] 0 >]]x::x1x::[[E42:[[S334:fr_id]]:days-to-event]] <small class="text-uppercase m-0">Day until the Ride</small>
+                  ::
+                    <!-- Ride has occurred  - show nothing -->
+                  ]]
                 ]]
-              ]]
+              </div>
+  
             </div>
-
           </div>
         </div>
-      </div>
-    </section>
-    <!-- END Progress section -->
-
-    <!-- BEGIN Ride Details section -->
-    <section id="ride_details" class="ride-details-container bg-primary text-white text-center stripe-overlay">
-      <div class="container">
-        <h2 class="text-center">
-          Ride Details
-        </h2>
-        <div class="row justify-content-center mt-3">
-          <div class="col-md-4 col-lg-3">
-              <svg class="svg-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.2 43.2" fill="#fff">
-                <g id="clock_icon" data-name="Layer 2">
-                  <g data-name="Layer 1">
-                    <path class="cls-1" d="M34.41 36.37A18.87 18.87 0 0 0 24.3 3.81V2.7a2.7 2.7 0 1 0-5.4 0v1.11A18.87 18.87 0 0 0 8.79 36.37L5 40.13a1.8 1.8 0 1 0 2.54 2.54l4.11-4.1a18.8 18.8 0 0 0 19.84 0l4.11 4.1a1.8 1.8 0 1 0 2.54-2.54zM21.6 38.79A16.29 16.29 0 1 1 37.89 22.5 16.31 16.31 0 0 1 21.6 38.79z"/>
-                    <path class="cls-1" d="M22.64 12.6a1 1 0 0 0-2.08 0l-.64 9.14-6.42.54a1.12 1.12 0 0 0-1 1 1.14 1.14 0 0 0 1 1.22l8.1.67a1.13 1.13 0 0 0 .26 0 1.66 1.66 0 0 0 1.54-1.78zM2.57 2.57c-3.1 3.11-3.44 7.79-.78 10.48L13.05 1.79C10.36-.87 5.68-.53 2.57 2.57zM40.63 2.57c-3.11-3.1-7.79-3.44-10.48-.78l11.26 11.26c2.66-2.69 2.32-7.37-.78-10.48z"/>
-                  </g>
-                </g>
-              </svg>
-            <p>
-              [[E130:"[[E47:[[S334:fr_id]]:fr_info:1:event_schedule]]" " | " "<br>" replaceall]]
-            </p>
-            <a class="button btn-secondary text-uppercase js__add-to-calendar" href="#" role="button" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'details-add-calendar']);">Add to Calendar</a>
-            <!-- https://www.addevent.com/add-to-calendar-button -->
-
-<!-- BEGIN add to calendar -->
-[[U0:thisEventDate=[[E42:0:event-date]]]] [[U0:parsedEventDate=[[E130:"[[S80:thisEventDate]]" dup dup "/" lastindexof 1 + swap length substring]][[E130:"[[S80:thisEventDate]]" dup 0 swap "/" indexof substring]][[E130:"[[S80:thisEventDate]]" dup dup "/" indexof 1 + swap "/" lastindexof substring]]]]
-        <div class="calendar-container js__calendar-menu" style="display: none;">
-            <p><a rel="nofollow" class="text-white" target="_blank" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text=[[T1:[[S42:0:title]]]]&amp;dates=[[S80:parsedEventDate]]/[[S80:parsedEventDate]]&amp;details=Visit%20your%20Ride%20Hub%20for%20event%20schedule%20and%20more%20details%20at%20http%3A%2F%2Fwww.alz.org%2Fride.&amp;location=[[T1:[[S42:0:location-name]]]]%2C+[[T1:[[S42:0:city]]]]%2C+[[T1:[[S42:0:state]]]]&amp;trp=false&amp;sprop=&amp;sprop=name:">Google Calendar</a>
-                <br /> or
-                <br />
-                <a class="text-white" href="/site/PageServer?pagename=Walk_iCal&amp;fr_id=[[S42:0:fr-id]]&amp;pgwrap=n">Other Calendars</a></p>
+      </section>
+      <!-- END Progress section -->
+  
+      <!-- BEGIN Ride Details section -->
+      <section id="ride_details" class="ride-details-container bg-primary text-white text-center stripe-overlay">
+        <div class="container experience-highlights">
+          <h2 class="text-center">
+            Your Experience
+          </h2>
+          <div class="row justify-content-center mt-3">
+            <div class="col-md-4">
+                <img src="assets/images/2020_clock_icon.png" alt="clock icon" width="85" height="85"/>
+                <h3 class="text-center">RIDE WEEKEND SCHEDULE</h3>
+              <p>
+                [[E130:"[[E47:[[S334:fr_id]]:fr_info:1:event_schedule]]" " | " "<br>" replaceall]]
+              </p>
+              
+              <p><a href="#" data-toggle="modal" data-target="#scheduleModal">LEARN MORE</a></p>
+              <!--<a class="button btn-secondary text-uppercase js__add-to-calendar" href="#" role="button" onClick="ga('send', 'event', 'ride greeting', 'click', 'details-add-calendar');">Add to Calendar</a>-->
+              <!-- https://www.addevent.com/add-to-calendar-button -->
+  <!-- BEGIN add to calendar -->
+  [[U0:thisEventDate=[[E47:[[S334:fr_id]]:fr_info:1:sponsor_1]]]] [[U0:parsedEventDate=[[E130:"[[S80:thisEventDate]]" dup dup "/" lastindexof 1 + swap length substring]][[E130:"[[S80:thisEventDate]]" dup 0 swap "/" indexof substring]][[E130:"[[S80:thisEventDate]]" dup dup "/" indexof 1 + swap "/" lastindexof substring]]]]
+  <!-- S80 thisEventDate: xx[[S80:thisEventDate]]xx -->
+  <!-- S80 parsedEventDate: xx[[S80:parsedEventDate]]xx -->
+          <!--<div class="calendar-container js__calendar-menu" style="display: none;">
+              <p><a rel="nofollow" class="text-white" target="_blank" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text=[[T1:[[S42:0:title]]]]&amp;dates=[[S80:parsedEventDate]]/[[S80:parsedEventDate]]&amp;details=Visit%20your%20Ride%20Hub%20for%20event%20schedule%20and%20more%20details%20at%20http%3A%2F%2Fwww.alz.org%2Fride.&amp;location=[[T1:[[E130:"[[E47:[[S334:fr_id]]:fr_info:1:event_schedule]]" " | " ", " replaceall]]]]&amp;trp=false&amp;sprop=&amp;sprop=name:">Google Calendar</a>
+                  <br /> or
+                  <br />
+                  <a class="text-white" href="/site/PageServer?pagename=ride_ical&amp;fr_id=[[S42:0:fr-id]]&amp;pgwrap=n">Other Calendars</a></p>
+          </div>-->
+  <!-- END add to calendar -->
+            </div>
+            <div class="col-md-4">
+              <img src="assets/images/2020_pin_icon.png" alt="map-pin icon" width="85" height="85"/>
+              <h3 class="text-center">ROUTES</h3>
+              <p>
+                  [[E130:"[[E47:[[S334:fr_id]]:fr_info:1:event_location]]" " | " "<br>" replaceall]]
+  
+                  <!-- 
+                  [[E47:[[S334:fr_id]]:fr_info:1:event_location]]
+                <br> [[E47:[[S334:fr_id]]:fr_info:1:sponsor_4]]
+                <br> [[E47:[[S334:fr_id]]:fr_info:1:event_location_city]],&nbsp;[[E47:[[S334:fr_id]]:fr_info:1:event_location_state]] [[E47:[[S334:fr_id]]:fr_info:1:sponsor_5]]
+                -->
+              </p>
+              
+              <p><a href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=25340">LEARN MORE</a></p>
+  <!--
+              [[?xxnullx::x[[E47:[[S42:0:fr-id]]:fr_info:1:map_link]]x::::
+                          <a href="[[E47:[[S42:0:fr-id]]:fr_info:1:map_link]]" class="button btn-secondary text-uppercase" role="button" target="_blank" onClick="ga('send', 'event', 'ride greeting', 'click', 'details-map');">Map it</a>
+                          ]]-->
+  
+            </div>
+            <div class="col-md-4">
+                <img src="assets/images/2020_party_icon.png" alt="party icon" width="85" height="85"/>
+                <h3 class="text-center">VIP RESEARCH DINNER</h3>
+                <p>
+                  [[E47:[[S334:fr_id]]:fr_info:1:coordinator_name]]
+                <!-- <br>[[?xxnullx::x[[E47:[[S334:fr_id]]:fr_info:1:coordinator_phone]]x::::<a href="tel:[[E130:"[[E47:[[S334:fr_id]]:fr_info:1:coordinator_phone]]" "." "" replaceall "RIDE (" "" replaceall ")" "" replaceall]]">[[E47:[[S334:fr_id]]:fr_info:1:coordinator_phone]]</a>]]
+                <br>
+                <a href="mailto:[[E47:[[S334:fr_id]]:fr_info:1:coordinator_email]]">[[E47:[[S334:fr_id]]:fr_info:1:coordinator_email]]</a> -->
+              </p>
+              <p><a href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=27151">LEARN MORE</a></p>
+            </div>
+          </div>
+          <!-- <div class="row justify-content-center mt-3">
+            <a class="button btn-secondary text-uppercase" href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=25339" role="button" onClick="ga('send', 'event', 'ride greeting', 'click', 'details-event-info');">More Event Info</a>
+          </div> -->
+  
         </div>
-<!-- END add to calendar -->
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <svg class="svg-location" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 29.58 43.2" fill="#fff">
-                <symbol id="USA" data-name="USA" viewBox="0 0 11.35 16.58">
-                  <path class="cls-1" d="M8.36,12.78l-.06.55c1.63.31,2.32.82,2.32,1.35,0,.78-1.81,1.34-4.94,1.34S.84,15.47.84,14.69c0-.52.59-1,2.22-1.33L3,12.78c-1.69.31-3,.91-3,1.78,0,1.31,2.93,2,5.68,2s5.67-.71,5.67-2C11.35,13.69,10,13.09,8.36,12.78ZM2.75,4.57a2.93,2.93,0,1,1,2.92,2.9A2.91,2.91,0,0,1,2.75,4.57Zm-2,.36c0,1.22,1.48,3.78,1.48,3.78l3.48,5.8L9,8.71s1.68-2.58,1.68-3.78a5,5,0,0,0-9.93,0Z"
-                  />
-                </symbol>
-              <g id="location_icon" data-name="Layer 2">
-                <g data-name="Layer 1">
-                  <use id="USA-3" data-name="USA" width="11.35" height="16.58" transform="scale(2.61)" xlink:href="#USA" />
-                </g>
-              </g>
-            </svg>
-            <p>
-                [[E47:[[S334:fr_id]]:fr_info:1:event_location]]
-              <br> [[E47:[[S334:fr_id]]:fr_info:1:sponsor_4]]
-              <br> [[E47:[[S334:fr_id]]:fr_info:1:event_location_city]],&nbsp;[[E47:[[S334:fr_id]]:fr_info:1:event_location_state]] [[E47:[[S334:fr_id]]:fr_info:1:sponsor_5]]
-            </p>
-
-            [[?xxnullx::x[[E47:[[S42:0:fr-id]]:fr_info:1:map_link]]x::::
-                        <a href="[[E47:[[S42:0:fr-id]]:fr_info:1:map_link]]" class="button btn-secondary text-uppercase" role="button" target="_blank" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'details-map']);">Map it</a>
-                        ]]
-
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <svg class="svg-contact" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.2 27.77" fill="#fff">
-              <g data-name="contact icon">
-                <path class="cls-1" d="M40.12 27.77h-4.63v-1.54a1.55 1.55 0 0 0 0-3.09H32.4a1.55 1.55 0 0 0 0 3.09v1.54H12.34v-1.54a1.55 1.55 0 0 0 0-3.09H9.26a1.55 1.55 0 1 0 0 3.09v1.54H3.08A3.09 3.09 0 0 1 0 24.68V3.08A3.08 3.08 0 0 1 3.08 0h37a3.08 3.08 0 0 1 3.12 3.08v21.6a3.09 3.09 0 0 1-3.08 3.09zM12.34 4.34C10.48 4.34 9 6.32 9 8.77s1.51 4.44 3.37 4.44 3.38-2 3.38-4.44-1.54-4.43-3.41-4.43zm5.39 10.6A12 12 0 0 0 14.5 14s-1.5 1.68-2.21 1.68S10.08 14 10.08 14a12.07 12.07 0 0 0-3.23.92c-.83.56-1.2 3.49-1.2 3.49H19s-.3-2.82-1.27-3.47zM37 6.17H23.15v1.54H37zm0 3.09H23.15v1.54H37zm0 3.08H23.15v1.54H37zm0 3.09H23.15V17H37z"
-                  data-name="Layer 1" />
-              </g>
-            </svg>
-            <p>
-                [[E47:[[S334:fr_id]]:fr_info:1:coordinator_name]]
-              <br> [[E47:[[S334:fr_id]]:fr_info:1:coordinator_phone]]
-              <br>
-              <a href="mailto:[[E47:[[S334:fr_id]]:fr_info:1:coordinator_email]]">[[E47:[[S334:fr_id]]:fr_info:1:coordinator_email]]</a>
-            </p>
-            <a class="button btn-secondary text-uppercase" href="TR/?fr_id=[[S42:0:fr-id]]&amp;pg=informational&amp;sid=25339" role="button" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'details-event-info']);">More Event Info</a>
+        <div class="greeting-intro-container">
+          <div class="row justify-content-center">
+              [[?xyxy[[E47:[[S334:fr_id]]:fr_info:1:sponsor_2]]xyxy::xyxyxyxy::::
+                <div class="col-md-6" style="background-image: url([[E47:[[S334:fr_id]]:fr_info:1:sponsor_2]]); background-size: cover;" />
+                  <img src="[[E47:[[S334:fr_id]]:fr_info:1:sponsor_2]]" style="visibility: hidden;" alt="happy riders"/> <!-- for mobile sizing -->
+                </div>
+              ]]
+            <div class="col-md-6"><div class="greeting-intro js__greeting-intro mt-4 container"></div></div>
           </div>
         </div>
-
-      </div>
-    </section>
-    <!-- END Ride Details section -->
-    <!-- BEGIN Search section -->
-    <section id="greeting_search" class="greeting-search-container">
-      <h2 class="text-center text-primary pb-3 pb-md-0 mb-md-4">Fundraising Leaderboard</h2>
-
-      <div class="container">
-        <div class="row search-row d-flex justify-content-center">
-          <div class="col-md-4 col-leaderboard participant-leaderboard">
-            <h3 class="h4">PARTICIPANTS</h3>
-            <ul class="list-group list-group-flush js__top-participants-list"></ul>
-            <form class="js__redirect-participant-search-form">
-              <h3 class="h4">SEARCH: NAME</h3>
-              <div class="d-flex flex-wrap flex-lg-nowrap">
-                <label class="sr-only" for="participantFirstName">First Name</label>
-                <input id="participantFirstName" type="text" class="col-md-5 form-control form-control-lg mb-2 mb-sm-0" style="height:60px;" placeholder="FIRST NAME">
-                <label class="sr-only" for="participantLastName">Last Name</label>
-                <div class="d-flex w-100">
-                <input id="participantLastName" type="text" class="col-md-5 last-name-input form-control form-control-lg flex-grow-1 search-last-name" placeholder="LAST NAME" >
-                <button type="submit" class="btn btn-secondary btn-lg" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'find-participant']);">
-                  <span class="sr-only">Search</span>
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-              </div>
-            </form>
+      </section>
+      <!-- END Ride Details section -->
+      <!-- BEGIN Search section -->
+      <section id="greeting_search" class="greeting-search-container">
+        <h2 class="text-center text-primary pb-3 pb-md-0 mb-md-4">Fundraising Leaderboard</h2>
+  
+        <div class="container">
+          <div class="row search-row d-flex justify-content-center">
+            <div class="col-md-4 col-leaderboard participant-leaderboard">
+              <h3 class="h4">PARTICIPANTS</h3>
+              <ul class="list-group list-group-flush js__top-participants-list"></ul>
+              <form class="js__redirect-participant-search-form">
+                <h3 class="h4">SEARCH: NAME</h3>
+                <div class="d-flex flex-wrap flex-lg-nowrap">
+                  <label class="sr-only" for="participantFirstName">First Name</label>
+                  <input id="participantFirstName" type="text" class="col-md-5 form-control form-control-lg mb-2 mb-sm-0" style="height:60px;" placeholder="FIRST NAME">
+                  <label class="sr-only" for="participantLastName">Last Name</label>
+                  <div class="d-flex w-100">
+                  <input id="participantLastName" type="text" class="col-md-5 last-name-input form-control form-control-lg flex-grow-1 search-last-name" placeholder="LAST NAME" >
+                  <button type="submit" class="btn btn-secondary btn-lg" onClick="ga('send', 'event', 'ride greeting', 'click', 'find-participant');">
+                    <span class="sr-only">Search</span>
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                </div>
+              </form>
+            </div>
+  
+            <div class="col-md-4 col-leaderboard team-leaderboard">
+              <h3 class="h4">TEAMS</h3>
+              <ul class="list-group list-group-flush js__top-teams-list"></ul>
+              <form class="js__redirect-team-search-form">
+                <h3 class="h4">SEARCH: TEAMS</h3>
+                <div class="d-flex">
+                  <label class="sr-only" for="teamName">Team Name</label>
+                  <input type="text" class="col-md-9 col-lg-10 form-control form-control-lg mb-2" id="teamName" placeholder="TEAM NAME">
+                  <button type="submit" class="btn btn-secondary btn-lg mb-2" onClick="ga('send', 'event', 'ride greeting', 'click', 'find-team');">
+                    <span class="sr-only">Search</span>
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+  
+           
+            <div class="col-md-4 col-leaderboard company-leaderboard" [[?xx::x[[E36:top_10_companies_list,[[S334:fr_id]],0,0,LIST,SUM,5]]x::style="display:none;"::]]>
+              <h3 class="h4">COMPANIES</h3>
+              <ul class="list-group list-group-flush js__top-companies-list"></ul>
+              
+  
+              <form class="js__redirect-company-search-form">
+                <h3 class="h4">SEARCH: COMPANIES</h3>
+                <div class="d-flex">
+                  <label class="sr-only" for="companyName">Company Name</label>
+                  <input type="text" class="col-md-9 col-lg-10 form-control form-control-lg mb-2" id="companyName" placeholder="COMPANY NAME">
+                  <button type="submit" class="btn btn-secondary btn-lg mb-2" onClick="ga('send', 'event', 'ride greeting', 'click', 'find-company');">
+                    <span class="sr-only">Search</span>
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+  
           </div>
-
-          <div class="col-md-4 col-leaderboard team-leaderboard">
-            <h3 class="h4">TEAMS</h3>
-            <ul class="list-group list-group-flush js__top-teams-list"></ul>
-            <form class="js__redirect-team-search-form">
-              <h3 class="h4">SEARCH: TEAMS</h3>
-              <div class="d-flex">
-                <label class="sr-only" for="teamName">Team Name</label>
-                <input type="text" class="col-md-9 col-lg-10 form-control form-control-lg mb-2" id="teamName" placeholder="TEAM NAME">
-                <button type="submit" class="btn btn-secondary btn-lg mb-2" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'find-team']);">
-                  <span class="sr-only">Search</span>
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </form>
-          </div>
-
-         
-          <div class="col-md-4 col-leaderboard company-leaderboard" [[?xx::x[[E36:top_10_companies_list,[[S334:fr_id]],0,0,LIST,SUM,5]]x::style="display:none;"::]]>
-            <h3 class="h4">COMPANIES</h3>
-            <ul class="list-group list-group-flush js__top-companies-list"></ul>
-            
-
-            <form class="js__redirect-company-search-form">
-              <h3 class="h4">SEARCH: COMPANIES</h3>
-              <div class="d-flex">
-                <label class="sr-only" for="companyName">Company Name</label>
-                <input type="text" class="col-md-9 col-lg-10 form-control form-control-lg mb-2" id="companyName" placeholder="COMPANY NAME">
-                <button type="submit" class="btn btn-secondary btn-lg mb-2" onClick="_gaq.push(['_trackEvent', 'ride greeting', 'click', 'find-company']);">
-                  <span class="sr-only">Search</span>
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </form>
-          </div>
-
         </div>
-      </div>
+  
+        <div class="js__default-company-roster" style="display:none;">
+            [[E42:[[S334:fr_id]]:top-companies:5]]
+        </div>
+  
+      </section>
+      <!-- END Search section -->
 
-      <div class="js__default-company-roster" style="display:none;">
-          [[E42:[[S334:fr_id]]:top-companies:5]]
-      </div>
-
-    </section>
-    <!-- END Search section -->
 
 
     <!--removeIf(production)-->
