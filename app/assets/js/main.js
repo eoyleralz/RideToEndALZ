@@ -1,18 +1,13 @@
 'use strict';
 (function ($) {
   $(document).ready(function () {
-
+    
     /*************/
     /* Namespace */
     /*************/
     window.cd = {};
-
-    $('ul.navbar-nav li.dropdown').hover(function () {
-      $(this).find('.dropdown-menu').stop(true, true).fadeIn(150);
-    }, function () {
-      $(this).find('.dropdown-menu').stop(true, true).fadeOut(150);
-    });
-
+    
+    $('a[data-toggle*=modal]').on('click',function(e){e.preventDefault();});
     $('.menu-btn').on('click', function (e) {
       e.preventDefault();
     });
@@ -25,6 +20,22 @@
     }
 
     // BEGIN default Walk login code
+    var pageHeight = document.body.scrollHeight;
+    var pageWidth = $(window).width();
+
+    if(pageHeight > 1080 && pageWidth > 992){
+      $('#back_to_top').removeClass('d-md-none');
+    }
+
+    if(pageWidth > 991){
+      // Add dropdown hover effect for non-mobile menu
+      $('ul.navbar-nav li.dropdown').hover(function () {
+        $(this).find('.dropdown-menu').stop(true, true).fadeIn(150);
+      }, function () {
+        $(this).find('.dropdown-menu').stop(true, true).fadeOut(150);
+      });
+    }
+
     var sessionTRID = "";
     var trIDs = [];
     if (luminateExtend.global.auth.token == null) {
@@ -122,11 +133,16 @@
 
               /* If registered for more than 1 walks */
               console.log('registered for more than 1 event');
-              $('.js__has-events').attr('id', 'eventsAccordion').wrapInner("<div class='multiple-events'></div>");
+
+              var totalTeamRaisers = 0;
+              var hasClosedEvents = false;
+              var teamRaiserList = '';
 
               $(teamraisers).each(function (i) {
                 // if event is accepting registrations only (1), accepting registrations and gifts (2), or accepting gifts only (3) populate sidebar list
                 if (this.status === '1' || this.status === '2' || this.status === '3') {
+                  totalTeamRaisers += 1;
+                  console.log('totalTeamRaisers: ', totalTeamRaisers);
                   $('.js__has-rides').show();
                   var trId = this.id;
                   var eventName = this.name;
@@ -146,8 +162,7 @@
 
                   trIDs.push(trId);
 
-                  $('.multiple-events').append(
-                    '<div class="card bg-transparent">' +
+                  teamRaiserList +=  '<div class="card bg-transparent">' +
                     '<div class="card-header" id="heading' + i + '">' +
                     '<a href="#" class="text-left text-white collapsed js__side-eventname" data-toggle="collapse" data-target="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">' +
                     '<i class="fas fa-plus-square text-secondary"></i>' +
@@ -157,23 +172,55 @@
                     '</div>' +
                     '<div id="collapse' + i + '" class="collapse" aria-labelledby="heading' + i + '" data-parent="#eventsAccordion">' +
                     '<div class="card-body">' +
-                    '<p>' + daysToEvent + '</p>' +
+                    // '<p>' + daysToEvent + '</p>' +
                     '<hr>' +
                     '<ul class="nav flex-column"><li class="nav-item pushy-link"><a class="nav-link js__side-dashboard" href="SPageServer?pagename=ridepc&pc2_page=pc-dashboard&fr_id=' + trId + '">Dashboard</a></li>' +
                     '<li class="nav-item pushy-link"><a class="nav-link js__side-mypage" href="SPageServer?pagename=ridepc&pc2_page=pc-edit-page&fr_id=' + trId + '">My Page</a></li>' +
                     (teamPageUrl ? '<li class="nav-item pushy-link"><a class="nav-link js__side-myteam" href="' + teamPageUrl + '">My Team</a></li>' : '') +
                     '<li class="nav-item pushy-link"><a class="nav-link js__side-social" href="SPageServer?pagename=ridepc&pc2_page=pc-social&fr_id=' + trId + '">Social</a></li>' +
                     '<li class="nav-item pushy-link"><a class="nav-link js__side-email" href="SPageServer?pagename=ridepc&pc2_page=pc-email&fr_id=' + trId + '">Email</a></li>' +
+                    '<li class="nav-item pushy-link"><a class="nav-link js__side-progress" href="SPageServer?pagename=ridepc&pc2_page=pc-donors&fr_id=' + trId + '">Progress</a></li>' +
                     '<li class="nav-item pushy-link"><a class="nav-link js__side-resources" href="SPageServer?pagename=ridepc&pc2_page=resources&fr_id=' + trId + '">Resources</a></li>' +
-                    '<li class="nav-item pushy-link"><a class="nav-link js__side-community" href="http://alzride.smallworldlabs.com/dashboard">Community</a></li>' +
+                    '<li class="nav-item pushy-link"><a class="nav-link js__side-community" href="http://alzride.smallworldlabs.com/dashboard" target="_blank">Community</a></li>' +
                     '<li class="nav-item pushy-link"><a class="nav-link js__side-notifications" href="SPageServer?pagename=ridepc&pc2_page=pc-notifications&fr_id=' + trId + '">Notifications</a></li></ul>' +
                     '</div>' +
                     '</div>' +
                     '</div><hr>' +
-                    '</div>');
+                    '</div>';
+                } else {
+                  hasClosedEvents = true;
                 }
               });
+              // manage case where someone is registered for more than 1 historic Ride but only 1 active Ride
+              if(hasClosedEvents === true){
+                console.log('hasClosedEvents = true');
+                $('.js__has-events').attr('id', 'eventsAccordion').wrapInner("<div class='multiple-events'></div>");
+                $('.multiple-events').append(teamRaiserList);
+              } else {
+                console.log('hasClosedEvents = false');
+                if(totalTeamRaisers > 1){
+                  var singleFrId = trIDs[0];
+                  var singleEventLink = 'TR?fr_id=' + singleFrId + '&pg=entry';
+                  // $('.js__has-events').addClass('single-event').append(teamRaiserList);
+                  $('.js__has-events').attr('id', 'eventsAccordion').wrapInner("<div class='multiple-events'></div>");
+                  $('.multiple-events').append(teamRaiserList);
 
+                  // $('#collapse1').addClass('show');
+                  // $('#heading1 .fas').hide();
+                  // console.log('singleFrId: ', singleFrId);
+                  // $('.js__side-eventname').removeClass('collapsed').removeAttr('data-toggle').attr('href', singleEventLink);
+                } else {
+                  var singleFrId = trIDs[0];
+                  var singleEventLink = 'TR?fr_id=' + singleFrId + '&pg=entry';
+                  $('.js__has-events').addClass('single-event').append(teamRaiserList);
+
+                  $('#collapse1').addClass('show');
+                  $('#heading1 .fas').hide();
+                  console.log('singleFrId: ', singleFrId);
+                  $('.js__side-eventname').removeClass('collapsed').removeAttr('data-toggle').attr('href', singleEventLink);
+                }
+
+              }
 
             } else if (teamraisers.length == 1 && teamraisers[0].status !== '0' && teamraisers[0].status !== '4' && teamraisers[0].status !== '8') {
               /* If registered for only 1 walk */
@@ -204,15 +251,16 @@
                 eventLocation +
                 '</div>' +
                 '<div class="card-body">' +
-                '<p>' + daysToEvent + '</p>' +
+                // '<p>' + daysToEvent + '</p>' +
                 '<hr>' +
                 '<ul class="nav flex-column"><li class="nav-item pushy-link"><a class="nav-link js__side-dashboard" href="SPageServer?pagename=ridepc&pc2_page=pc-dashboard&fr_id=' + trId + '">Dashboard</a></li>' +
                 '<li class="nav-item pushy-link"><a class="nav-link js__side-mypage" href="SPageServer?pagename=ridepc&pc2_page=pc-edit-page&fr_id=' + trId + '">My Page</a></li>' +
                 (teamPageUrl ? '<li class="nav-item pushy-link"><a class="nav-link js__side-myteam" href="' + teamPageUrl + '">My Team</a></li>' : '') +
                 '<li class="nav-item pushy-link"><a class="nav-link js__side-social" href="SPageServer?pagename=ridepc&pc2_page=pc-social&fr_id=' + trId + '">Social</a></li>' +
                 '<li class="nav-item pushy-link"><a class="nav-link js__side-email" href="SPageServer?pagename=ridepc&pc2_page=pc-email&fr_id=' + trId + '">Email</a></li>' +
+                '<li class="nav-item pushy-link"><a class="nav-link js__side-progress" href="SPageServer?pagename=ridepc&pc2_page=pc-donors&fr_id=' + trId + '">Progress</a></li>' +
                 '<li class="nav-item pushy-link"><a class="nav-link js__side-resources" href="SPageServer?pagename=ridepc&pc2_page=resources&fr_id=' + trId + '">Resources</a></li>' +
-                '<li class="nav-item pushy-link"><a class="nav-link js__side-community" href="http://alzride.smallworldlabs.com/dashboard">Community</a></li>' +
+                '<li class="nav-item pushy-link"><a class="nav-link js__side-community" href="http://alzride.smallworldlabs.com/dashboard" target="_blank">Community</a></li>' +
                 '<li class="nav-item pushy-link"><a class="nav-link js__side-notifications" href="SPageServer?pagename=ridepc&pc2_page=pc-notifications&fr_id=' + trId + '">Notifications</a></li></ul>' +
                 '</div>' +
                 '</div><hr>' +
@@ -227,31 +275,31 @@
             if ($('.js__has-events').length > 0) {
               // add event tracking to side nav if events exist
               $('.js__side-eventname').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-greeting']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-greeting');
               });
               $('.js__side-dashboard').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-dashboard']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-dashboard');
               });
               $('.js__side-mypage').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-my-page']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-my-page');
               });
               $('.js__side-myteam').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-team-page']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-team-page');
               });
               $('.js__side-social').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-social']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-social');
               });
               $('.js__side-email').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-email']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-email');
               });
               $('.js__side-resources').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-resources']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-resources');
               });
               $('.js__side-community').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-community']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-community');
               });
               $('.js__side-notifications').on('click', function (e) {
-                _gaq.push(['_trackEvent', 'top navigation', 'click', 'nav-utility-slide-notifications']);
+                ga('send', 'event', 'top navigation', 'click', 'nav-utility-slide-notifications');
               });
             }
 
@@ -421,19 +469,7 @@
         $('.js__retrieve-login-error-container').show();
       }
     });
-    $('.js__reg-retrieve-login-form').on('submit', function (e) {
-      e.preventDefault();
-      var form = $(this);
-      form.parsley().validate();
-      if (form.parsley().isValid()) {
-        var consEmail = $('#regRetrieveLoginEmail').val();
-        cd.consRetrieveLogin(consEmail, true);
-        cd.resetValidation();
-      } else {
-        $('.js__retrieve-login-error-message').html('Please fix the errors below.');
-        $('.js__retrieve-login-error-container').show();
-      }
-    });
+
     // show login retrieval form
     $('.js__show-retrieve-login').on('click', function (e) {
       e.preventDefault();
@@ -551,8 +587,11 @@
           },
           error: function (response) {
             $('.js__loading').hide();
-
-            $('.js__error-participant-search').text(response.errorResponse.message).show();
+            if(response.errorResponse.code === '2664'){
+              $('.js__error-participant-search').text('You must enter at least 3 characters to search by participant first and last name.').show();
+            } else {
+              $('.js__error-participant-search').text(response.errorResponse.message).show();
+            }
           }
         }
       });
@@ -595,7 +634,7 @@
                     '</a></div>' +
                     '<div class="captain-name">Team Captain: ' + team.captainFirstName + ' ' + team.captainLastName + '</div>' +
                     ((team.companyName !== undefined) ? '<div class="team-company-name">' + team.companyName + '</div>' : '') +
-                    '</div><div class="col-xs-12 col-sm-3 d-flex align-items-center">' + '<a class="button btn-block btn-secondary" href="' + team.joinTeamURL + '&skip_login_page=true&s_captainConsId=' + team.captainConsId + '">JOIN</a></div></div>');
+                    '</div><div class="col-xs-12 col-sm-3 d-flex align-items-center">' + '<a class="button btn-block btn-secondary" href="' + team.joinTeamURL + '&skip_login_page=true&s_joinTeamID=' + team.id + '&s_captainConsId=' + team.captainConsId + '">JOIN</a></div></div>');
                   $('.js__search-tabs-container').hide();
                   $('.js__refine-search-container').show();
                   $('.js__search-results-container').slideDown();
@@ -675,8 +714,11 @@
           },
           error: function (response) {
             $('.js__loading').hide();
-
-            $('.js__error-team-search').text(response.errorResponse.message).show();
+            if(response.errorResponse.code === '2664'){
+              $('.js__error-company-search').text('You must enter at least 3 characters to search by company name.').show();
+            } else {
+              $('.js__error-company-search').text(response.errorResponse.message).show();
+            }
 
           }
         }
@@ -806,13 +848,13 @@
               };
             });
           }
-          // } 
+          // }
         });
 
     }
 
     // #################
-    // PAGEBUILDER PAGES 
+    // PAGEBUILDER PAGES
     // #################
     if ($('body').is('.pg_ride_homepage')) {
       // home page scripts
@@ -955,7 +997,7 @@
 
 
     // ########
-    // TR PAGES 
+    // TR PAGES
     // ########
 
     cd.runThermometer = function (raised, goal) {
@@ -1018,29 +1060,36 @@
 
       cd.loadTopParticipantsRoster = function () {
 
-        $('#frStatus4 .indicator-list-row').each(function () {
-          var url = $(this).find('.team-honor-list-name a').attr('href');
-          var name = $(this).find('.team-honor-list-name a').text();
-          var amount = $(this).find('.team-honor-list-value').text();
-          var participantData = '<li class="list-group-item"><a class="roster-name" href="' + url +
-            '">' + name + '</a><span class="roster-amt">' +
-            amount + '</span></li>';
-          if (url !== undefined) {
-            $('.js__top-participants-list').append(participantData);
+        $('#frStatus4 .indicator-list-row').each(function (i) {
+          if(i < 5){
+            var url = $(this).find('.team-honor-list-name a').attr('href');
+            var name = $(this).find('.team-honor-list-name a').text();
+            var amount = $(this).find('.team-honor-list-value').text();
+            var participantData = '<li class="list-group-item"><a class="roster-name" href="' + url +
+              '">' + name + '</a><span class="roster-amt">' +
+              amount + '</span></li>';
+            if (url !== undefined) {
+              $('.js__top-participants-list').append(participantData);
+            }
           }
-        });
 
+        });
       } // end loadTopParticipantsRoster
 
       cd.loadTopTeamsRoster = function () {
-        $('#frStatus2 .team-honor-list-row').each(function () {
-          var url = $(this).find('.team-honor-list-name a').attr('href');
-          var name = $(this).find('.team-honor-list-name a').text();
-          var amount = $(this).find('.team-honor-list-value').text();
-          var teamData = '<li class="list-group-item"><a class="roster-name" href="' + url +
+
+        $('#frStatus2 .team-honor-list-row').each(function (i) {
+          if(i < 5){
+            var url = $(this).find('.team-honor-list-name a').attr('href');
+            var name = $(this).find('.team-honor-list-name a').text();
+            var amount = $(this).find('.team-honor-list-value').text();
+            var teamData = '<li class="list-group-item"><a class="roster-name" href="' + url +
             '">' + name + '</a><span class="roster-amt">' +
             amount + '</span></li>';
-          $('.js__top-teams-list').append(teamData);
+            if (url !== undefined) {
+              $('.js__top-teams-list').append(teamData);
+            }
+          }
         });
 
       } // end loadTopTeamsRoster
@@ -1056,6 +1105,7 @@
         var topCompaniesData = [];
         // Get the company name and URL from the hidden E42 top-companies S tag.
         $('.company-roster-row').each(function (i) {
+        if(i < 5){
           var url = $(this).find('a').attr('href');
           var name = $(this).find('a').text();
 
@@ -1065,6 +1115,7 @@
             "companyUrl": url,
             "companyName": name
           }
+        }
         });
 
         // Get the company raised amount from the default "Top Companies" list that appears on the greeting page
@@ -1079,9 +1130,9 @@
 
         // Now that all data is in a single array, iterate through that array to build our custom top companies leaderboard
         $(topCompaniesData).each(function (i) {
-          var companyData = '<li class="list-group-item"><a class="roster-name" href="' + $(this)[i].companyUrl +
-            '">' + $(this)[i].companyName + '</a><span class="roster-amt">' +
-            $(this)[i].companyAmt + '</span></li>';
+          var companyData = '<li class="list-group-item"><a class="roster-name" href="' + $(topCompaniesData)[i].companyUrl +
+            '">' + $(topCompaniesData)[i].companyName + '</a><span class="roster-amt">' +
+            $(topCompaniesData)[i].companyAmt + '</span></li>';
           $('.js__top-companies-list').append(companyData);
         });
       } // end loadTopCompaniesRoster
@@ -1095,6 +1146,18 @@
         e.preventDefault();
         $('.js__calendar-menu').toggle();
       });
+
+
+      // $('.js__add-to-calendar-opening-ceremony').on('click', function (e) {
+      //   e.preventDefault();
+      //   $('.js__calendar-menu-opening-ceremony').toggle();
+      // });
+
+      // $('.js__add-to-calendar-ride-day').on('click', function (e) {
+      //   e.preventDefault();
+      //   $('.js__calendar-menu-ride-day').toggle();
+      // });
+      $('.js__greeting-intro').html($('#fr_html_container').html());
 
     }
 
@@ -1148,11 +1211,11 @@
 
       // add event tracking to team roster list
       $('.js__teammate-name').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride team', 'click', 'team-roster-name']);
+        ga('send', 'event', 'ride team', 'click', 'team-roster-name');
       });
 
       $('.js__teammate-donate').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride team', 'click', 'team-roster-donate']);
+        ga('send', 'event', 'ride team', 'click', 'team-roster-donate');
       });
 
 
@@ -1217,7 +1280,7 @@
       $('.js__coordinator-email-container').html('<a href="mailto:' + coordinatorEmail + '">' + coordinatorEmail + '</a>');
 
       jQuery('.js__coordinator-email-container a').on('click', function () {
-        _gaq.push(['_trackEvent', 'ride company', 'click', 'contact-email']);
+        ga('send', 'event', 'ride company', 'click', 'contact-email');
       });
 
       var companyTeams = $('.company-team-list');
@@ -1267,19 +1330,19 @@
 
       // add event tracking to top teams and top participants lists
       $('.js__top-teams-name').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride company', 'click', 'top-teams-name']);
+        ga('send', 'event', 'ride company', 'click', 'top-teams-name');
       });
 
       $('.js__top-teams-join').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride company', 'click', 'top-teams-join']);
+        ga('send', 'event', 'ride company', 'click', 'top-teams-join');
       });
 
       $('.js__top-participants-name').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride company', 'click', 'top-participants-name']);
+        ga('send', 'event', 'ride company', 'click', 'top-participants-name');
       });
 
       $('.js__top-participants-donate').on('click', function (e) {
-        _gaq.push(['_trackEvent', 'ride company', 'click', 'top-participants-donate']);
+        ga('send', 'event', 'ride company', 'click', 'top-participants-donate');
       });
 
       cd.runThermometer(companyRaised, companyGoal);
@@ -1333,7 +1396,7 @@
       $('.disclaimer').parent().css('width', '100%');
       $('.show-mobile').parent().css('width', '100%');
 
-      // set autocomplete to organization for employer name field 
+      // set autocomplete to organization for employer name field
       $('#donor_matching_employersearchname').attr('autocomplete', 'organization');
 
       /* update input types for HTML5 mobile device UX */
@@ -1382,7 +1445,7 @@
               $('#billing_addr_state_row').slideDown();
 
               // US Zip Code Records Officially Map to only 1 Primary Location
-              places = result['places'][0];
+              var places = result['places'][0];
               $("#billing_addr_cityname").val(places['place name']);
               $("#billing_addr_state").val(places['state abbreviation']);
               zip_box.addClass('success').removeClass('error');
@@ -1466,9 +1529,9 @@
       }
     }
 
-    // ########## 
-    // API SURVEY 
-    // ########## 
+    // ##########
+    // API SURVEY
+    // ##########
     if ($('.survey-form').length > 0) {
 
     }
